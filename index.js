@@ -75,20 +75,23 @@ SmsCounter.detectEncoding = text => {
 SmsCounter.countGsm7bitEx = text => {
   let char2, chars;
 
-  chars = () => {
-    let _i, _len, _results;
-    _results = [];
-    for (_i = 0, _len = text.length; _i < _len; _i++) {
-      char2 = text[_i];
-
-      if (char2.match(SmsCounter.gsm7bitExOnlyRegExp) != null) {
-        _results.push(char2);
-      }
-    }
-    return _results;
-  };
+  chars = SmsCounter.countForeachGsm7bitEx(text)
 
   return chars.length;
+};
+
+SmsCounter.countForeachGsm7bitEx = (text) => {
+  let char2;
+  let _i, _len, _results;
+  _results = [];
+  for (_i = 0, _len = text.length; _i < _len; _i++) {
+    char2 = text[_i];
+
+    if (char2.match(SmsCounter.gsm7bitExOnlyRegExp) != null) {
+      _results.push(char2);
+    }
+  }
+  return _results;
 };
 
 module.exports = SmsCounter;
